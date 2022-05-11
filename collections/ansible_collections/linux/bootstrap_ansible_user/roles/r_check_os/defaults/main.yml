@@ -1,5 +1,6 @@
 ---
-# defaults file for r_check_4_rhel
+# defaults file for r_check_4_os
 supported_os:
-  - redhat
-  - ubuntu
+  - redhat_8
+  - ubuntu_20
+  - ubuntu_21

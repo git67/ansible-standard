@@ -1,0 +1,5 @@
+# supported os releases
+# can used for override the roles builtin defaults
+#supported_os:
+#  - redhat_9
+#  - ubuntu_21
