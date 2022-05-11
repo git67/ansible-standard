@@ -1,2 +1,2 @@
-# ansible_standard
+# ansible-standard
 Ansible Playbook Template - Best Practice
