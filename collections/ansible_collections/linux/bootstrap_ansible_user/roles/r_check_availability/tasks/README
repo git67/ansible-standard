@@ -1,0 +1,17 @@
+###############################################
+## name: for r_check_availability
+##
+## function:
+## - timed ansible ping to all hosts, given by inventory-group
+##
+## dev: heiko stein
+## mail: heiko.stein@etomer.com
+##
+## rel: 0.1
+##
+## ref:
+## - %
+##
+## changelog:
+## -
+#################################################

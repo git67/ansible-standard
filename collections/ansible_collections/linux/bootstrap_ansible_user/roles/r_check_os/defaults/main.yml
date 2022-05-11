@@ -1,0 +1,5 @@
+---
+# defaults file for r_check_4_rhel
+supported_os:
+  - redhat
+  - ubuntu

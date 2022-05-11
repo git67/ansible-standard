@@ -1,0 +1,17 @@
+##############################################
+## name: r_write_local_state_facts
+##
+## function:
+## - write local state facts
+##
+## dev: heiko stein
+## mail: heiko.stein@etomer.com
+##
+## rel: 0.1
+##
+## ref:
+## - %
+##
+## changelog:
+## -
+#################################################

@@ -1,0 +1,12 @@
+# vars file for r_create_ansible_user
+---
+ansible:
+  name: ansible
+  home_dir: /home/ansible
+  group: ansible
+  comment: "ansible automatisation user"
+  uid: 61065
+  gid: 61065
+  sudo_file: ansible
+  sudo_entry: "ansible ALL=(ALL) NOPASSWD: ALL"
+  pub_key_file: "~/.ssh/id_rsa.pub"

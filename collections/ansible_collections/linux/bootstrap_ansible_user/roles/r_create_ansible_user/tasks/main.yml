@@ -1,0 +1,48 @@
+---
+# tasks file for r_create_ansible_user
+  - block:
+    - name: "create group {{ ansible.group }}:{{ ansible.gid  }}"
+      group:
+        name: "{{ ansible.group  }}"
+        gid: "{{ ansible.gid  }}"
+        state: present
+
+    - name: "create user {{ ansible.name }}:{{ ansible.uid }}"
+      user:
+        name: "{{ ansible.name  }}"
+        uid: "{{ ansible.uid  }}"
+        group: "{{ ansible.gid }}"
+        comment: "{{ ansible.comment }}"
+        generate_ssh_key: yes
+        ssh_key_bits: 2048
+        state: present
+
+    - name: "put public key to ~/.ssh/authorized_keys"
+      authorized_key:
+        user: "{{ ansible.name  }}"
+        key: "{{ lookup('file', ansible.pub_key_file) }}"
+        state: present
+
+    - name: "create /etc/sudoers.d/{{ ansible.sudo_file }}"
+      file:
+        path: "/etc/sudoers.d/{{ ansible.sudo_file }}"
+        state: touch
+        mode: 0644
+        modification_time: preserve
+        access_time: preserve
+
+    - name: "add entry {{ ansible.sudo_entry }} to  /etc/sudoers.d/{{ ansible.sudo_file }}"
+      lineinfile:
+        dest: "/etc/sudoers.d/{{ ansible.sudo_file }}"
+        state: present
+        regexp: "^{{ ansible.name }}"
+        line: "{{ ansible.sudo_entry }}"
+        validate: "visudo -cf %s"
+
+    rescue:
+    - fail:
+        msg: "create ansible user failed"
+
+    tags:
+    - create_ansible_user
+

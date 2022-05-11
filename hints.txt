@@ -1,0 +1,12 @@
+# sudo /touch /var/log/ansible.log
+# chmod 600 ./files/*priv*
+
+# ansible-vault encrypt --vault-password-file=./.secret ./files/ansible.pub.vault
+# ansible-vault encrypt --vault-password-file=./.secret ./files/admin*vault
+
+#_ra p_base_configure_os.yml --skip-tags reboot_nodes,probe_services
+#_ra p_base_configure_os.yml --skip-tags reboot_nodes,probe_services,always --tags configure_yum_cron
+
+# ra p_base_configure_os.yml --skip-tags always,configure_dns,configure_ntp,configure_yum_cron,create_admin_user,deploy_ca,probe_services,reboot_nodes,update_all --tags configure_linux_repos -e repo_pattern="*docker*"
+
+

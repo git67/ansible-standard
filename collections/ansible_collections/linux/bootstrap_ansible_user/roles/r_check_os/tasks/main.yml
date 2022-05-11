@@ -1,0 +1,30 @@
+---
+# tasks file for r_check_4_rhel
+  - block:
+    - name: "reload facts"
+      ansible.builtin.setup:
+        gather_subset:
+          - '!all'
+          - '!any'
+          - facter
+
+    - name: "probe for supported os"
+      ansible.builtin.fail:
+        msg: "{{ ansible_host }} doesn't run an supported os"
+      when: ( ansible_distribution|lower not in supported_os|lower)
+      
+
+    - name: "set runtime distribution flagi for the given hosts" 
+      ansible.builtin.set_fact:
+        runtime_dist_flag: "{{ ansible_distribution|lower }}_{{ ansible_distribution_major_version }}"
+
+    - name: "display runtime distribution flag"
+      ansible.builtin.debug:
+        msg: "{{ ansible_host }}:{{ runtime_dist_flag }}"
+      
+    rescue:
+      - ansible.builtin.fail:
+          msg: "error: during check 4 rhel"
+
+    tags:
+      - always

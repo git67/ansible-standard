@@ -1,0 +1,13 @@
+---
+# tasks file for r_check_availability
+  - block:
+    - name: "check availibility {{ ansible_play_hosts | to_yaml }}"
+      wait_for_connection:
+      delay: 10
+
+    rescue:
+    - fail:
+        msg: "error: during check availibility {{ ansible_play_hosts | to_yaml }}"
+
+    tags:
+    - always

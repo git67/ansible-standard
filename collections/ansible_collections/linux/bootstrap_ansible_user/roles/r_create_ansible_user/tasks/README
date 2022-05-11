@@ -1,0 +1,20 @@
+##############################################
+# name: r_create_ansible_user
+#
+# function:
+# - create ansible user at given nodes
+# - distribute public key
+# - create sudo role
+#
+# dev: heiko stein
+# mail: heiko.stein@etomer.com
+#
+# rel: 0.2
+#
+# ref:
+# - vars/main.yml
+# - files/ansible.pub.vault
+#
+# changelog:
+# - files/ansible.pub.vault crypted by ansible-vault
+#################################################

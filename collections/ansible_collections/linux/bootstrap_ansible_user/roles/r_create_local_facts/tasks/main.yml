@@ -1,0 +1,24 @@
+---
+# tasks file for r_create_local_facts
+  - block:
+    - name: "create directory for local facts if doesn't exists"
+      file:
+        path: "/etc/ansible/facts.d"
+        state: directory
+        mode: 0755
+ 
+    - name: "template fact files to /etc/ansible/facts.d"
+      template:
+        dest: "/etc/ansible/facts.d/{{ (item.split('/t_')[-1]).split('.j2')[0] }}"
+        src: "{{ item }}"
+        mode: 0644
+        force: no
+      with_fileglob:
+        - "templates/t_*.fact.j2"
+
+    rescue:
+    - fail:
+        msg: "error create local facts"
+
+    tags:
+    - always

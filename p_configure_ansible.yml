@@ -1,0 +1,84 @@
+################################################
+# name: {{ cookiecutter.playbook_name }}.yml
+#
+# function:
+# - create ansible user
+# - put ssh key in place
+# - create sudo role
+#
+# dev:  {{ cookiecutter.developer }}
+# mail: {{ cookiecutter.developer_mail }}
+#
+# rel:  {{ cookiecutter.release }}
+# changelog:
+# -
+##############################################
+---
+- name: "configure ansible client at {{ ansible_play_hosts | to_yaml }}"
+  hosts: "{{ group_name | default('all') }}"
+  collections:
+    - linux.bootstrap_ansible_user
+  gather_facts: false
+  any_errors_fatal: true
+  ignore_unreachable: false
+  become: true
+  vars:
+    pl_name: "config_ansible"
+
+##############################################
+
+  pre_tasks:
+    - block:
+        - name: "role check availibility"
+          ansible.builtin.include_role:
+            name: r_check_availability
+
+        - name: "role check node os"
+          ansible.builtin.include_role:
+            name: r_check_os
+
+        - name: "role create local facts"
+          ansible.builtin.include_role:
+            name: r_create_local_facts
+
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+
+      tags:
+        - always
+
+##############################################
+
+  tasks:
+    - block:
+        - name: "role create ansible user"
+          ansible.builtin.include_role:
+            name: r_create_ansible_user
+
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+
+      tags:
+        - create_ansible_user
+
+##############################################
+
+  post_tasks:
+    - block:
+        - name: "role write local state facts"
+          ansible.builtin.include_role:
+            name: r_write_local_state_facts
+
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+
+      tags:
+        - always
+
+##############################################

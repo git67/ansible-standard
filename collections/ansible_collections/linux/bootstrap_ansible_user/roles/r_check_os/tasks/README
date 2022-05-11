@@ -1,0 +1,17 @@
+###############################################
+# name: r_check_4_rhel
+#
+# function:
+# - probe os release 
+#
+# dev: heiko stein
+# mail: heiko.stein@etomer.com
+#
+# rel: 0.1
+#
+# ref:
+# - %
+#
+# changelog:
+# -
+###############################################
