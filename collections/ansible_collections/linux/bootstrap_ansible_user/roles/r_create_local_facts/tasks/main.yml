@@ -6,7 +6,7 @@
       path: "/etc/ansible/facts.d"
       state: directory
       mode: 0755
- 
+
   - name: "template fact files to /etc/ansible/facts.d"
     ansible.builtin.template:
       dest: "/etc/ansible/facts.d/{{ (item.split('/t_')[-1]).split('.j2')[0] }}"
@@ -17,9 +17,9 @@
       - "templates/t_*.fact.j2"
 
   rescue:
-  - name: "role {{ ansible_role_name }} failed"
-    ansible.builtin.fail:
-      msg: "error create local facts"
+    - name: "role {{ ansible_role_name }} failed"
+      ansible.builtin.fail:
+        msg: "error create local facts"
 
   tags:
-  - always
+    - always

@@ -40,9 +40,9 @@
       validate: "visudo -cf %s"
 
   rescue:
-  - name: "role {{ ansible_role_name }} failed"
-    ansible.builtin.fail:
-      msg: "create ansible user failed"
+    - name: "role {{ ansible_role_name }} failed"
+      ansible.builtin.fail:
+        msg: "create ansible user failed"
 
   tags:
-  - create_ansible_user
+    - create_ansible_user
