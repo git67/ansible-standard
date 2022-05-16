@@ -17,7 +17,8 @@
 ##############################################
 ---
 # tasks file for r_write_local_state_facts
-- block:
+- name: "write ansible local fact at the end of the play"
+  block:
   - name: "set local fact last_run = {{ pl_name }}"
     community.general.ini_file:
       path: "/etc/ansible/facts.d/state.fact"
