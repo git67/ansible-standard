@@ -1,4 +1,8 @@
 ## ansible-standard
+```
+git clone https://github.com/git67/ansible-standard <your_working_dir>
+```
+
 
 #### create/update your inventory file
 ###### (look into ansible.cfg for reference to this file)
@@ -22,3 +26,5 @@ _ri p_configure_ansible.yml
 ```
 _ra <playbook>
 ```
+
+#### it's up to you, to install pre-commit -> https://pre-commit.com/#install
