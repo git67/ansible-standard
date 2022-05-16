@@ -1,7 +1,3 @@
 [linux]
 mn1
 mn2
-
-[all:vars]
-ansible_connection=ssh
-ansible_ssh_common_args='-o UserKnownHostsFile=/dev/null -o GSSAPIAuthentication=no -o StrictHostKeyChecking=no'

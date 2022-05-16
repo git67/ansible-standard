@@ -1,3 +1,7 @@
+# generic
+ansible_connection=ssh
+ansible_ssh_common_args='-o UserKnownHostsFile=/dev/null -o GSSAPIAuthentication=no -o StrictHostKeyChecking=no'
+
 # supported os releases
 # can used for override the roles builtin defaults
 #supported_os:
