@@ -18,57 +18,45 @@
 # -
 ##############################################
 ---
-- name: "gather facts of given hosts"
-  ansible.builtin.setup:
-    gather_subset:
-      - '!all'
-      - '!any'
-      - facter
-  
 - name: "probe for supported os / set runtime distribution flag"
+  tags:
+    - always
   block:
-  - name: "set runtime distribution flag for the given hosts"
-    ansible.builtin.set_fact:
-      runtime_dist_flag: "{{ ansible_distribution|lower }}_{{ ansible_distribution_major_version }}"
+    - name: "gather facts of given hosts"
+      ansible.builtin.setup:
+        gather_subset:
+          - '!all'
+          - '!any'
+          - facter
 
-  - name: "probe for supported os"
-    ansible.builtin.fail:
-      msg: "{{ ansible_host }} doesn't run an supported os"
-    when: ( runtime_dist_flag not in supported_os|lower)
+    - name: "list installed os"
+      ansible.builtin.debug:
+        msg: "{{ ansible_host }} : {{ ansible_distribution }}_{{ ansible_distribution_major_version }}"
 
-  - name: "display runtime distribution flag"
-    ansible.builtin.debug:
-      msg: "{{ ansible_host }}:{{ runtime_dist_flag }}"
+    - name: "list supported os"
+      ansible.builtin.debug:
+        msg: "supported os: {{ os }}"
+      loop: "{{ supported_os }}"
+      loop_control:
+        loop_var: os
+      run_once: true
+
+    - name: "set runtime distribution flag for the given hosts"
+      ansible.builtin.set_fact:
+        runtime_dist_flag: "{{ ansible_distribution|lower }}_{{ ansible_distribution_major_version }}"
+
+    - name: "probe for supported os"
+      ansible.builtin.fail:
+        msg: "{{ ansible_host }} doesn't run an supported os"
+      when: ( runtime_dist_flag not in supported_os|lower)
+
+    - name: "display runtime distribution flag"
+      ansible.builtin.debug:
+        msg: "{{ ansible_host }}:{{ runtime_dist_flag }}"
 
   rescue:
     - name: "role {{ ansible_role_name }} failed"
       ansible.builtin.fail:
         msg: "error: during check 4 supported os"
-  
-  tags:
-    - always
-
-- name: "debug block"
-  block:
-  - name: "list installed os"
-    ansible.builtin.debug:
-      msg: "{{ ansible_host }} : {{ ansible_distribution }}_{{ ansible_distribution_major_version }}"
-
-  - name: "list supported os"
-    ansible.builtin.debug:
-      msg: "supported os: {{ os }}"
-    loop: "{{ supported_os }}"
-    loop_control:
-      loop_var: os
-    run_once: true
-
-  rescue:
-    - name: "role {{ ansible_role_name }} failed"
-      ansible.builtin.fail:
-        msg: "error: during debug for check 4 supported os"
-
-  tags:
-    - never
-    - debug
 
 ##############################################

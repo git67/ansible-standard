@@ -14,14 +14,17 @@
 # -
 ##############################################
 ---
-- name: "configure ansible client at {{ ansible_play_hosts | to_yaml }}"
+- name: "configure ansible client at {{ ansible_play_hosts|to_yaml }}"
   hosts: "{{ group_name | default('all') }}"
   collections:
     - linux.bootstrap_ansible_user
   gather_facts: false
   any_errors_fatal: true
   ignore_unreachable: false
+  debugger: on_failed
   become: true
+  vars:
+    pl_name: "p_configure_ansible.yml"
 
 ##############################################
 
@@ -40,7 +43,7 @@
             name: r_create_local_facts
 
       rescue:
-        - name: "pre tasks {{ ansible_play_name }} failed"
+        - name: "pre tasks {{ pl_name }} failed"
           ansible.builtin.fail:
             msg: "running rollback"
 

@@ -1,4 +1,4 @@
-## ansible-bootstrap
+## ansible-standard
 
 #### create/update your inventory file
 ###### (look into ansible.cfg for reference to this file)
@@ -15,7 +15,7 @@ alias
 #### create ansible environment at managed nodes 
 ###### (keep in mind, you have to know the initial root password of your managed nodes)
 ```
-_ri p_base_configure_ansible.yml
+_ri p_configure_ansible.yml
 ```
 
 #### now you can work complete interaktivly
