@@ -22,8 +22,6 @@
   any_errors_fatal: true
   ignore_unreachable: false
   become: true
-  vars:
-    pl_name: "config_ansible"
 
 ##############################################
 
@@ -42,7 +40,7 @@
             name: r_create_local_facts
 
       rescue:
-        - name: "pre tasks {{ pl_name }} failed"
+        - name: "pre tasks {{ ansible_play_name }} failed"
           ansible.builtin.fail:
             msg: "running rollback"
 

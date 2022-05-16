@@ -1,12 +1,29 @@
+################################################
+# rolename: r_write_local_state_facts
+#
+# function:
+# - write ansible local fact at the end of the play
+#
+# dev:  {{ cookiecutter.developer }}
+# mail: {{ cookiecutter.developer_mail }}
+#
+# rel:  {{ cookiecutter.release }}
+#
+# ref:
+# - %
+#
+# changelog:
+# -
+##############################################
 ---
 # tasks file for r_write_local_state_facts
 - block:
-  - name: "set local fact last_run = {{ pl_name }}"
+  - name: "set local fact last_run = {{ ansible_play_name }}"
     community.general.ini_file:
       path: "/etc/ansible/facts.d/state.fact"
       section: state
       option: last_run
-      value: "{{ pl_name }}"
+      value: "{{ ansible_play_name }}"
       state: present
       backup: true
 
@@ -14,15 +31,15 @@
     ansible.builtin.replace:
       backup: true
       dest: "/etc/ansible/facts.d/state.fact"
-      regexp: '^(all_run(?!.*\b{{ pl_name }}\b).*)$'
-      replace: '\1,{{ pl_name }}'
+      regexp: '^(all_run(?!.*\b{{ ansible_play_name }}\b).*)$'
+      replace: '\1,{{ ansible_play_name }}'
 
   - name: "set local fact last_deploy = {{ lookup('pipe','date +%H:%M:%S-%d.%m.%Y') }}"
     community.general.ini_file:
       path: "/etc/ansible/facts.d/state.fact"
       section: state
       option: last_deploy
-      value: "{{ lookup('pipe','date +%H:%M:%S-%d.%m.%Y') }}-{{ pl_name }}"
+      value: "{{ lookup('pipe','date +%H:%M:%S-%d.%m.%Y') }}-{{ ansible_play_name }}"
       state: present
       backup: true
 

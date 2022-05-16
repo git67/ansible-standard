@@ -1,5 +1,21 @@
+################################################
+# rolename: r_create_local_facts
+#
+# function:
+# - create/write ansible local facts
+#
+# dev:  {{ cookiecutter.developer }}
+# mail: {{ cookiecutter.developer_mail }}
+#
+# rel:  {{ cookiecutter.release }}
+#
+# ref:
+# - ../templates/*
+#
+# changelog:
+# -
+##############################################
 ---
-# tasks file for r_create_local_facts
 - block:
   - name: "create directory for local facts if doesn't exists"
     ansible.builtin.file:
@@ -12,7 +28,7 @@
       dest: "/etc/ansible/facts.d/{{ (item.split('/t_')[-1]).split('.j2')[0] }}"
       src: "{{ item }}"
       mode: 0644
-      force: no
+      force: false
     with_fileglob:
       - "templates/t_*.fact.j2"
 

@@ -1,13 +1,29 @@
+################################################
+# rolename: r_check_availability
+#
+# function:
+# - probe by internal ansible transport and the ping/win_ping module to guarantee correct end-to-end functioning
+#
+# dev:  {{ cookiecutter.developer }}
+# mail: {{ cookiecutter.developer_mail }}
+#
+# rel:  {{ cookiecutter.release }}
+# ref:
+# - %
+#
+# changelog:
+# -
+##############################################
 ---
-# tasks file for r_check_availability
-  - block:
-    - name: "check availibility {{ ansible_play_hosts | to_yaml }}"
-      ansible.builtin.wait_for_connection:
+- block:
+  - name: "check availibility {{ ansible_play_hosts | to_yaml }}"
+    ansible.builtin.wait_for_connection:
       delay: 10
 
-    rescue:
-    - ansible.builtin.fail:
+  rescue:
+    - name: "role {{ ansible_role_name }} failed"
+      ansible.builtin.fail:
         msg: "error: during check availibility {{ ansible_play_hosts | to_yaml }}"
 
-    tags:
+  tags:
     - always
