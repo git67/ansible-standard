@@ -18,6 +18,13 @@
 # -
 ##############################################
 ---
+- name: "gather facts of given hosts"
+  ansible.builtin.setup:
+    gather_subset:
+      - '!all'
+      - '!any'
+      - facter
+  
 - name: "probe for supported os / set runtime distribution flag"
   block:
   - name: "set runtime distribution flag for the given hosts"
@@ -37,19 +44,12 @@
     - name: "role {{ ansible_role_name }} failed"
       ansible.builtin.fail:
         msg: "error: during check 4 supported os"
-
+  
   tags:
     - always
 
 - name: "debug block"
   block:
-  - name: "reload facts"
-    ansible.builtin.setup:
-      gather_subset:
-        - '!all'
-        - '!any'
-        - facter
-
   - name: "list installed os"
     ansible.builtin.debug:
       msg: "{{ ansible_host }} : {{ ansible_distribution }}_{{ ansible_distribution_major_version }}"
