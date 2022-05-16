@@ -1,0 +1,8 @@
+wheel
+pip
+ansible
+ansible-lint
+flake8
+tox
+pylint
+pre-commit
