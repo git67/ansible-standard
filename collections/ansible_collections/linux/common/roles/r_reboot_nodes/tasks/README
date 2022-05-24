@@ -1,0 +1,17 @@
+#################################################
+# name: r_reboot_nodes
+#
+# function:
+# - reboot all given nodes
+#
+# dev: heiko stein
+# mail: heiko.stein@etomer.com
+#
+# rel: 0.1
+#
+# ref:
+# - %
+#
+# changelog:
+# -
+#################################################

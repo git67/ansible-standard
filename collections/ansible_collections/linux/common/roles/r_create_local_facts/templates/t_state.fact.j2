@@ -1,0 +1,5 @@
+[state]
+initial_deploy = {{ lookup('pipe','date +%H:%M:%S-%d.%m.%Y') }}-{{ pl_name }}
+last_deploy = {{ lookup('pipe','date +%H:%M:%S-%d.%m.%Y') }}-{{ pl_name }}
+last_run = {{ pl_name }}
+all_run = {{ pl_name }}

@@ -1,0 +1,98 @@
+################################################
+# name: {{ cookiecutter.playbook_name }}.yml
+#
+# function:
+# - create ansible user
+# - put ssh key in place
+# - create sudo role
+#
+# dev:  {{ cookiecutter.developer }}
+# mail: {{ cookiecutter.developer_mail }}
+#
+# rel:  {{ cookiecutter.release }}
+# changelog:
+# -
+##############################################
+---
+- name: "configure ansible client at {{ ansible_play_hosts|to_yaml }}"
+  hosts: "{{ group_name | default('all') }}"
+  collections:
+    - linux.common
+    - linux.bootstrap_ansible_user
+    - linux.update
+  gather_facts: false
+  any_errors_fatal: true
+  ignore_unreachable: false
+  debugger: on_failed
+  become: true
+  vars:
+    pl_name: "p_configure_ansible.yml"
+
+##############################################
+
+  pre_tasks:
+    - block:
+        - name: "role check availibility"
+          ansible.builtin.include_role:
+            name: r_check_availability
+
+        - name: "role check node os"
+          ansible.builtin.include_role:
+            name: r_check_os
+
+        - name: "role create local facts"
+          ansible.builtin.include_role:
+            name: r_create_local_facts
+
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+
+      tags:
+        - always
+
+##############################################
+
+  tasks:
+    - block:
+        - name: "role create ansible user"
+          ansible.builtin.include_role:
+            name: r_create_ansible_user
+          tags:
+            - create_ansible_user
+
+        - name: "role update all"
+          ansible.builtin.include_role:
+            name: r_update_all_{{ runtime_dist_flag }}
+          tags:
+            - update_all
+
+        - name: "role reboot nodes"
+          ansible.builtin.include_role:
+            name: r_reboot_nodes
+          tags:
+            - reboot_nodes
+
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+
+##############################################
+
+  post_tasks:
+    - block:
+        - name: "role write local state facts"
+          ansible.builtin.include_role:
+            name: r_write_local_state_facts
+
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+
+      tags:
+        - always
+
+##############################################
