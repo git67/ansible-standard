@@ -35,7 +35,7 @@
       ssh_key_bits: 2048
       state: present
 
-  - name: "put public key to ~/.ssh/authorized_keys"
+  - name: "add public key to ~/.ssh/authorized_keys"
     ansible.builtin.authorized_key:
       user: "{{ ansible.name  }}"
       key: "{{ lookup('file', ansible.pub_key_file) }}"
