@@ -29,3 +29,4 @@ _ra <playbook>
 ```
 
 #### it's up to you, to install pre-commit -> https://pre-commit.com/#install
+#### a simple configuration example for hook ansible-lint is included (.pre-commit-config.yaml) 
