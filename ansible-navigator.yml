@@ -1,0 +1,14 @@
+ansible-navigator:
+  ansible:
+    config:
+      path: ./ansible.cfg
+    cmdline: "--forks 20"
+  color:
+    enable: true
+  execution-environment:
+    enabled: true
+    image: quay.io/ansible/creator-ee:v0.4.2
+  logging:
+    level: critical
+    append: false
+    file: log/ansible-navigator-log.txt
