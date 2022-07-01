@@ -2,7 +2,7 @@
 # rolename: r_create_local_facts
 #
 # function:
-# - create/write ansible local facts
+# - create/write state as ansible local fact
 #
 # dev:  {{ cookiecutter.developer }}
 # mail: {{ cookiecutter.developer_mail }}

@@ -2,7 +2,7 @@
 # rolename: r_write_local_state_facts
 #
 # function:
-# - write ansible local fact at the end of the play
+# - write state ansible local fact at the end of the play
 #
 # dev:  {{ cookiecutter.developer }}
 # mail: {{ cookiecutter.developer_mail }}

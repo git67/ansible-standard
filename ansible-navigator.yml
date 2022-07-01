@@ -5,6 +5,7 @@ ansible-navigator:
     cmdline: "--forks 20"
   color:
     enable: true
+    osc4: true
   execution-environment:
     enabled: true
     image: quay.io/ansible/creator-ee:v0.4.2
