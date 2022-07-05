@@ -1,4 +1,4 @@
-## ansible-standard 
+## ansible-standard    
 #### clone these repository for local use
 ```
 git clone https://github.com/git67/ansible-standard <your_working_dir>
