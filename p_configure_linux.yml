@@ -26,7 +26,7 @@
   debugger: on_failed
   become: true
   vars:
-    pl_name: "p_configure_ansible.yml"
+    pl_name: "p_configure_linux.yml"
 
 ##############################################
 
