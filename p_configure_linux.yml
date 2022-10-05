@@ -1,18 +1,18 @@
 ################################################
-# name: {{ cookiecutter.playbook_name }}.yml
+# name: p_<playbook>.yml
 #
 # function:
-# - create ansible user
-# - put ssh key in place
-# - create sudo role
+# - xxx
+# - xxx
+# - xxx
 #
-# dev:  {{ cookiecutter.developer }}
-# mail: {{ cookiecutter.developer_mail }}
+# dev:  <developer>
+# mail: <developer mail>
 #
-# rel:  {{ cookiecutter.release }}
+# rel:  <release>
 # changelog:
-# -
-##############################################
+# - xxx
+################################################
 ---
 - name: "configure ansible client at {{ ansible_play_hosts|to_yaml }}"
   hosts: "{{ group_name | default('all') }}"
