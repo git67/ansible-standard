@@ -7,3 +7,15 @@
 #supported_os:
 #  - redhat_9
 #  - ubuntu_21
+
+#ansible:
+#  name: ansible-admin
+#  home_dir: /home/ansible-admin
+#  group: ansible
+#  comment: "ansible automatisation user"
+#  uid: 61069
+#  gid: 61069
+#  sudo_file: ansible-admin
+#  sudo_entry: "ansible-admin ALL=(ALL) NOPASSWD: ALL"
+#  pub_key_file: "~/.ssh/id_rsa.pub"
+
