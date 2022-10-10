@@ -1,0 +1,101 @@
+################################################
+# name: p_<playbook>.yml
+#
+# function:
+# - <desc>
+# - <desc>
+# - <desc>
+#
+# dev:  <developer>
+# mail: <developer mail>
+#
+# rel:  <release>
+# changelog:
+# - <changes>
+################################################
+---
+- name: "<do anything at> {{ ansible_play_hosts|to_yaml }}"
+  hosts: "{{ group_name | default('none') }}"
+  collections:
+    - linux.common
+    - <collection>
+    - <collection>
+  gather_facts: false
+  any_errors_fatal: true
+  ignore_unreachable: false
+  debugger: <on_failed|on_skipped|never>
+  become: true
+  vars:
+    pl_name: "p_<playbook>.yml"
+
+##############################################
+
+  pre_tasks:
+    - block:
+        - name: "role check availibility"
+          ansible.builtin.include_role:
+            name: r_check_availability
+
+        - name: "role check node os"
+          ansible.builtin.include_role:
+            name: r_check_os
+
+        - name: "role create local facts"
+          ansible.builtin.include_role:
+            name: r_create_local_facts
+
+        - name: "<role info>"
+          ansible.builtin.include_role:
+            name: r_<role>
+
+      rescue:
+        - name: "pre task {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "<fail message>"
+
+      tags:
+        - always
+
+##############################################
+
+  tasks:
+    - block:
+        - name: "<role info>"
+          ansible.builtin.include_role:
+            name: r_<role>
+          tags:
+            - <tagname = rolename>
+
+        - name: "<role info>"
+          ansible.builtin.include_role:
+            name: r_<role>
+          tags:
+            - <tagname = rolename>
+
+      rescue:
+        - name: "task {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "<fail message>"
+
+
+##############################################
+
+  post_tasks:
+    - block:
+        - name: "role write local state facts"
+          ansible.builtin.include_role:
+            name: r_write_local_state_facts
+
+        - name: "<role info>"
+          ansible.builtin.include_role:
+            name: r_<role>
+
+      rescue:
+        - name: "post task {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "<fail message>"
+
+      tags:
+        - always
+
+##############################################
