@@ -33,7 +33,7 @@
   pre_tasks:
     - block:
         - name: "role check availibility"
-          ansible.builtin.include_role:
+          include_role:
             name: r_check_availability
 
         - name: "role check node os"
