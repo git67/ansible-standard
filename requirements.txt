@@ -6,3 +6,5 @@ flake8
 tox
 pylint
 pre-commit
+sphinx
+sphinx-rtd-theme

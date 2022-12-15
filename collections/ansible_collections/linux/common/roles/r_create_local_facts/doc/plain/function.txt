@@ -1,0 +1,1 @@
+- create/write state as ansible local fact

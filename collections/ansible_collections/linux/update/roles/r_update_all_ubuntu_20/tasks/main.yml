@@ -1,21 +1,3 @@
-###############################################
-# rolename: r_update_all
-#
-# function:
-# - update linux operating system in a depending matter
-#
-# dev:  {{ cookiecutter.developer }}
-# mail: {{ cookiecutter.developer_mail }}
-#
-# rel:  {{ cookiecutter.release }}
-#
-# ref:
-# - ../defaults/*
-#
-# changelog:
-# -
-##############################################
----
 # tasks file for r_update_all
 - name: "update linux os"
   tags:

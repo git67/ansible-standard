@@ -7,3 +7,15 @@ repos:
   hooks:
     - id: ansible-lint
       files: \.(yaml|yml)$
+
+- repo: local
+  hooks:
+  - id: sphinx
+    name: Build documentation with Sphinx
+    language: system
+    entry: python3 -m sphinx -b html . _build
+    verbose: true
+    # do not match any file -- always run exactly once
+    files: ^$
+    always_run: true
+    pass_filenames: false

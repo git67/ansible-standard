@@ -1,21 +1,3 @@
-################################################
-# rolename: r_write_local_state_facts
-#
-# function:
-# - write state ansible local fact at the end of the play
-#
-# dev:  {{ cookiecutter.developer }}
-# mail: {{ cookiecutter.developer_mail }}
-#
-# rel:  {{ cookiecutter.release }}
-#
-# ref:
-# - %
-#
-# changelog:
-# -
-##############################################
----
 # tasks file for r_write_local_state_facts
 - name: "write ansible local fact at the end of the play"
   block:

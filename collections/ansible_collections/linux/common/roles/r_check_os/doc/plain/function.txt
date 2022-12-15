@@ -1,0 +1,5 @@
+- probe for supported os release
+
+- set runtime distribution flag for os-depend tasks
+
+- debug out via --tags debug

@@ -1,18 +1,4 @@
-################################################
-# name: p_<playbook>.yml
-#
-# function:
-# - xxx
-# - xxx
-# - xxx
-#
-# dev:  <developer>
-# mail: <developer mail>
-#
-# rel:  <release>
-# changelog:
-# - xxx
-################################################
+##############################################
 ---
 - name: "configure ansible client at {{ ansible_play_hosts|to_yaml }}"
   hosts: "{{ group_name | default('all') }}"

@@ -1,7 +1,7 @@
-## ansible-standard
+## ansible-standard 
 #### clone these repository for local use
 ```
-git clone https://github.com/git67/ansible-standard <your_working_dir>
+git clone https://oauth2:glpat-__RxdGjH8NcrUmgUURyN@support.etomer.com/gitlab/heiko.stein/ansible-standard  <your_working_dir>
 ```
 
 
