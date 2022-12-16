@@ -11,7 +11,7 @@ git clone https://github.com/git67/ansible-standard <your_working_dir>
 vi inventory/hosts
 ```
 
-#### source environment
+#### source environment 
 ```
 source .env
 alias
