@@ -1,0 +1,21 @@
+---
+- name: "run fast for notification {{ ansible_play_hosts|to_yaml }}"
+  hosts: "{{ group_name | default('all') }}"
+  collections:
+    - community.general
+    - linux.common
+    - linux.bootstrap_ansible_user
+    - linux.update
+  gather_facts: false
+  any_errors_fatal: true
+  ignore_unreachable: false
+  debugger: on_failed
+  become: true
+  vars:
+    pl_name: "p_fast.yml"
+
+  tasks:
+    - block:
+        - name: "debug "
+          ansible.builtin.debug:
+            msg: "{{ pl_name }}"
