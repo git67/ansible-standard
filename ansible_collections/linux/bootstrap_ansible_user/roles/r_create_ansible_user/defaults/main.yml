@@ -9,4 +9,4 @@ ansible:
   gid: 61065
   sudo_file: ansible
   sudo_entry: "ansible ALL=(ALL) NOPASSWD: ALL"
-  pub_key_file: "~/.ssh/id_rsa.pub"
+  pub_key_file: "./files/keys/ansible.pub"
