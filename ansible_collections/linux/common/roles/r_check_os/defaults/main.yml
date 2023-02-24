@@ -1,0 +1,6 @@
+---
+# defaults file for r_check_4_os
+supported_os:
+  - redhat_8
+  - ubuntu_20
+  - ubuntu_21

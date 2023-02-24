@@ -1,0 +1,4 @@
+---
+# defaults file for r_reboot_nodes
+reboot_sleep_timer: 5
+wait_for_connection_delay: 30

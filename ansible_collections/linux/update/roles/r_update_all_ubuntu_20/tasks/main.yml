@@ -1,0 +1,21 @@
+---
+- name: "update linux os"
+  tags:
+    - update_all
+
+  block:
+    - name: "update all packages"
+      ansible.builtin.apt:
+        name: "*"
+        state: latest
+
+    - name: "upgrade"
+      ansible.builtin.apt:
+        upgrade: dist
+        update_cache: true
+      when: os_upgrade  == "true"
+
+  rescue:
+    - name: "role {{ ansible_role_name }} failed"
+      ansible.builtin.fail:
+        msg: "error: during update linux os"

@@ -1,0 +1,35 @@
+---
+- name: "write ansible local fact at the end of the play"
+  tags:
+    - always
+
+  block:
+    - name: "set local fact last_run = {{ pl_name }}"
+      community.general.ini_file:
+        path: "/etc/ansible/facts.d/state.fact"
+        section: state
+        option: last_run
+        value: "{{ pl_name }}"
+        state: present
+        backup: true
+
+    - name: "set local fact all_run"
+      ansible.builtin.replace:
+        backup: true
+        dest: "/etc/ansible/facts.d/state.fact"
+        regexp: '^(all_run(?!.*\b{{ pl_name }}\b).*)$'
+        replace: '\1,{{ pl_name }}'
+
+    - name: "set local fact last_deploy = {{ lookup('pipe','date +%H:%M:%S-%d.%m.%Y') }}"
+      community.general.ini_file:
+        path: "/etc/ansible/facts.d/state.fact"
+        section: state
+        option: last_deploy
+        value: "{{ lookup('pipe','date +%H:%M:%S-%d.%m.%Y') }}-{{ pl_name }}"
+        state: present
+        backup: true
+
+  rescue:
+    - name: "error writing state fact"
+      ansible.builtin.fail:
+        msg: "error writing state fact"

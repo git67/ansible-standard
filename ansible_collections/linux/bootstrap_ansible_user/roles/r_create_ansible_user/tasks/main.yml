@@ -1,0 +1,48 @@
+# tasks file for r_create_ansible_user
+- name: "create user for ansible"
+  tags:
+    - create_ansible_user
+
+  block:
+    - name: "create group {{ ansible.group }}:{{ ansible.gid }}"
+      ansible.builtin.group:
+        name: "{{ ansible.group }}"
+        gid: "{{ ansible.gid }}"
+        state: present
+
+    - name: "create user {{ ansible.name }}:{{ ansible.uid }}"
+      ansible.builtin.user:
+        name: "{{ ansible.name }}"
+        uid: "{{ ansible.uid }}"
+        group: "{{ ansible.gid }}"
+        comment: "{{ ansible.comment }}"
+        generate_ssh_key: true
+        ssh_key_bits: 2048
+        state: present
+
+    - name: "add public key to ~/.ssh/authorized_keys"
+      ansible.builtin.authorized_key:
+        user: "{{ ansible.name }}"
+        key: "{{ lookup('file', ansible.pub_key_file) }}"
+        state: present
+
+    - name: "create /etc/sudoers.d/{{ ansible.sudo_file }}"
+      ansible.builtin.file:
+        path: "/etc/sudoers.d/{{ ansible.sudo_file }}"
+        state: touch
+        mode: 0644
+        modification_time: preserve
+        access_time: preserve
+
+    - name: "add entry {{ ansible.sudo_entry }} to  /etc/sudoers.d/{{ ansible.sudo_file }}"
+      ansible.builtin.lineinfile:
+        dest: "/etc/sudoers.d/{{ ansible.sudo_file }}"
+        state: present
+        regexp: "^{{ ansible.name }}"
+        line: "{{ ansible.sudo_entry }}"
+        validate: "visudo -cf %s"
+
+  rescue:
+    - name: "role {{ ansible_role_name }} failed"
+      ansible.builtin.fail:
+        msg: "create ansible user failed"

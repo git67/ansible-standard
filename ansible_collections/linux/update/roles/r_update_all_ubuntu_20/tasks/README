@@ -1,0 +1,17 @@
+################################################
+# name: r_update_all
+#
+# function:
+# - update all rpm's from configured repos
+#
+# dev: heiko stein
+# mail: heiko.stein@etomer.com
+#
+# rel: 0.1
+#
+# ref:
+# - %
+#
+# changelog:
+# -
+#################################################
