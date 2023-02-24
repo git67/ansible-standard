@@ -3,4 +3,5 @@
 **/roles/sav/
 **/log/
 _build/
+_html/
 **/.DS_Store

@@ -1,1 +1,0 @@
-- probe by internal ansible transport and the ping/win_ping module to guarantee correct end-to-end functioning

@@ -1,1 +1,0 @@
-- write state ansible local fact at the end of the play

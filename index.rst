@@ -11,7 +11,7 @@ Welcome to Ansible Standard's documentation!
    :caption: Contents:
 
    doc/*
-   collections/ansible_collections/linux/bootstrap_ansible_user/**
-   collections/ansible_collections/linux/common/**
-   collections/ansible_collections/linux/update/**
+   ansible_collections/linux/bootstrap_ansible_user/**
+   ansible_collections/linux/common/**
+   ansible_collections/linux/update/**
    **
