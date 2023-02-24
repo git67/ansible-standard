@@ -16,6 +16,11 @@
 
   tasks:
     - block:
-        - name: "debug "
+        - name: "debug"
           ansible.builtin.debug:
             msg: "{{ pl_name }}"
+
+        - name: "set special stat"
+          ansible.builtin.set_stats:
+            data:
+              value: "test-for-stats"
