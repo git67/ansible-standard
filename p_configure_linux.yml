@@ -3,6 +3,7 @@
 - name: "configure ansible client at {{ ansible_play_hosts|to_yaml }}"
   hosts: "{{ group_name | default('all') }}"
   collections:
+    - community.general
     - linux.common
     - linux.bootstrap_ansible_user
     - linux.update
