@@ -27,9 +27,9 @@
                         'Email': 'john.doe@gisa.de' 
                         }   
 
-        - name: "set special stat"
-          ansible.builtin.set_stats:
-            data:
-              value: "{{ state_dict }}"
-            aggregate: false
-            per_host: false
+#        - name: "set special stat"
+#          ansible.builtin.set_stats:
+#            data:
+#              value: "{{ state_dict }}"
+#            aggregate: false
+#            per_host: false
