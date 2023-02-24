@@ -20,7 +20,16 @@
           ansible.builtin.debug:
             msg: "{{ pl_name }}"
 
+        - name: "set fact for state"
+          ansible.builtin.set_fact:
+            state_dict: {
+                        'Name': 'John Doe', 
+                        'Email': 'john.doe@gisa.de' 
+                        }   
+
         - name: "set special stat"
           ansible.builtin.set_stats:
             data:
-              value: "test-for-stats"
+              value: "{{ state_dict }}"
+            aggregate: false
+            per_host: false
