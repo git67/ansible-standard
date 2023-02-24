@@ -23,13 +23,15 @@
         - name: "set fact for state"
           ansible.builtin.set_fact:
             state_dict: {
-                        'Name': 'John Doe', 
-                        'Email': 'john.doe@gisa.de' 
+                        'key1': 'val1', 
+                        'key2': 'val2' 
                         }   
+            state_var: "statue"
 
-#        - name: "set special stat"
-#          ansible.builtin.set_stats:
-#            data:
-#              value: "{{ state_dict }}"
-#            aggregate: false
-#            per_host: false
+        - name: "set special stat"
+          ansible.builtin.set_stats:
+            data:
+              value1: "{{ state_dict }}"
+              value2: "{{ state_var }}"
+            aggregate: false
+            per_host: false
