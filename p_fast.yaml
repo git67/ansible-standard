@@ -26,12 +26,12 @@
                         'key1': 'val1', 
                         'key2': 'val2' 
                         }   
-            state_var: "statue"
+            state_var: "status"
 
         - name: "set special stat"
           ansible.builtin.set_stats:
             data:
-              value1: "{{ state_dict }}"
-              value2: "{{ state_var }}"
+              value1: "{{ state_dict |default({'key1':'empty'}) }}"
+              value2: "{{ state_var |default('empty') }}"
             aggregate: false
             per_host: false
