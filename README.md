@@ -17,16 +17,12 @@ source .env
 alias
 ```
 
-#### create ansible environment at managed nodes 
-###### (keep in mind, you have to know the initial root password of your managed nodes)
-```
-_ri p_configure_ansible.yml
-```
-
-#### now you can work complete interaktivly
-```
-_ra <playbook>
-```
-
 #### it's up to you, to install pre-commit -> https://pre-commit.com/#install
 #### a simple configuration example for hook ansible-lint is included (.pre-commit-config.yaml) 
+
+#### for update the collection tree or the python3 venv (if used) you cant do this by the following commands
+
+```
+pip install -Ur requirements.pip
+ansible-galaxy collection install -r requirements.yml
+```
