@@ -31,3 +31,9 @@
               inubit2: "{{ scalar_return_to_inubit |default('empty') }}"
             aggregate: false
             per_host: false
+
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+
