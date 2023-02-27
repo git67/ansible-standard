@@ -3,9 +3,6 @@
   hosts: "{{ group_name | default('all') }}"
   collections:
     - community.general
-    - linux.common
-    - linux.bootstrap_ansible_user
-    - linux.update
   gather_facts: false
   any_errors_fatal: true
   ignore_unreachable: false
@@ -22,7 +19,7 @@
 
         - name: "set fact for state"
           ansible.builtin.set_fact:
-            state_dict: {
+            dict_return_to_inubit: {
                         'key1': 'val1', 
                         'key2': 'val2' 
                         }   
@@ -30,7 +27,7 @@
         - name: "set special stat"
           ansible.builtin.set_stats:
             data:
-              value1: "{{ state_dict |default({'key1':'empty'}) }}"
-              value2: "{{ state_var |default('empty') }}"
+              value1: "{{ dict_return_to_inubit |default({'key1':'empty', 'key1':'empty'}) }}"
+              value2: "{{ scalar_return_to_inubit |default('empty') }}"
             aggregate: false
             per_host: false
