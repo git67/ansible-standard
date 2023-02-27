@@ -20,14 +20,14 @@
         - name: "set fact for state"
           ansible.builtin.set_fact:
             dict_return_to_inubit: {
-                        'key1': 'val1', 
-                        'key2': 'val2' 
+                        'state1': 'val1', 
+                        'state2': 'val2' 
                         }   
 
         - name: "set special stat"
           ansible.builtin.set_stats:
             data:
-              value1: "{{ dict_return_to_inubit |default({'key1':'empty', 'key1':'empty'}) }}"
-              value2: "{{ scalar_return_to_inubit |default('empty') }}"
+              inubit1: "{{ dict_return_to_inubit |default({'state1':'empty', 'state2':'empty'}) }}"
+              inubit2: "{{ scalar_return_to_inubit |default('empty') }}"
             aggregate: false
             per_host: false
