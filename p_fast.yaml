@@ -26,7 +26,6 @@
                         'key1': 'val1', 
                         'key2': 'val2' 
                         }   
-            state_var: "status"
 
         - name: "set special stat"
           ansible.builtin.set_stats:
