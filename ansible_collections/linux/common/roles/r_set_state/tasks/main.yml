@@ -1,0 +1,22 @@
+---
+- name: "write information into awx api job dict"
+  tags:
+    - always
+
+  block:
+    - name: "set fact for job dict"
+          ansible.builtin.set_fact:
+            dict_return_to_inubit: {} 
+
+        - name: "set special stat"
+          ansible.builtin.set_stats:
+            data:
+              inubit1: "{{ dict_return_to_inubit |default({{ dict_return_to_inubit }}) }}"
+            aggregate: false
+            per_host: false
+
+  rescue:
+    - name: "error writing into awx api job dict"
+      ansible.builtin.fail:
+        msg: "error writing job dict"
+
