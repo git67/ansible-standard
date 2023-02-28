@@ -28,8 +28,6 @@ FAILED=""
 
 while [ "${STATUS}" != "successful" ] 
 do
-	curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
-                "http://${AWX}/api/v2/jobs/${JOB}/" > ./job_info.job_${ID}_${JOB}
 	STATUS=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
         	"http://${AWX}/api/v2/jobs/${JOB}/" | jq '.status'|sed -e 's/"//g')
 	FAILED=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
@@ -43,6 +41,9 @@ GET_FROM_ANSIBLE=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: applicatio
                 "http://${AWX}/api/v2/jobs/${JOB}/" | jq '.artifacts')
 
 echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
+
+curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
+                "http://${AWX}/api/v2/jobs/${JOB}/" > ./job_info.job_${ID}_${JOB}
 
 curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
         "http://${AWX}/api/v2/jobs/${JOB}/stdout/?format=txt" > stdout.job_${ID}_${JOB}  
