@@ -23,6 +23,7 @@
                         'state1': 'val1', 
                         'state2': 'val2' 
                         }   
+            scalar_return_to_inubit: "for_raoul"
 
         - name: "set special stat"
           ansible.builtin.set_stats:
