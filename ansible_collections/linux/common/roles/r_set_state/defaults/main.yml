@@ -2,4 +2,4 @@
 # defaults file for r_set_state
 default_job_artifacts: 
   msg1: "how to get from awx api:"
-  msg2: ""http://${AWX}/api/v2/jobs/${JOB}/" | jq '.artifacts'"
+  msg2: "http://${AWX}/api/v2/jobs/${JOB}/ | jq '.artifacts'"
