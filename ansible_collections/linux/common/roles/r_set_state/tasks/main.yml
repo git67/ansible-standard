@@ -6,7 +6,7 @@
   block:
     - name: "set fact for job dict"
       ansible.builtin.set_fact:
-        dict_return_to_job_artifacts: {} 
+        dict_return_to_job_artifacts:  
 
     - name: "set special stat"
       ansible.builtin.set_stats:
