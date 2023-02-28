@@ -5,3 +5,5 @@
 _build/
 _html/
 **/.DS_Store
+**/awx/job*
+**/awx/stdout*

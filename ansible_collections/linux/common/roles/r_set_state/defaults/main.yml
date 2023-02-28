@@ -1,7 +1,5 @@
 ---
 # defaults file for r_set_state
-dict_return_to_inubit: 
-  msg1: "get from awx api",
+default_job_artifacts: 
+  msg1: "how to get from awx api:"
   msg2: "\"http://${AWX}/api/v2/jobs/${JOB}/\" | jq '.artifacts'"
-                        }
-

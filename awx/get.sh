@@ -4,7 +4,7 @@
 
 AWX="192.168.56.23:30964"
 CRED="hs:hs"
-PL="p_fast.yaml"
+PL="p_configure_linux.yml"
 
 clear
 

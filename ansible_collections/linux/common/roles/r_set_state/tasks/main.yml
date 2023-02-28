@@ -5,15 +5,15 @@
 
   block:
     - name: "set fact for job dict"
-          ansible.builtin.set_fact:
-            dict_return_to_inubit: {} 
+      ansible.builtin.set_fact:
+        dict_return_to_job_artifacts: {} 
 
-        - name: "set special stat"
-          ansible.builtin.set_stats:
-            data:
-              inubit1: "{{ dict_return_to_inubit |default({{ dict_return_to_inubit }}) }}"
-            aggregate: false
-            per_host: false
+    - name: "set special stat"
+      ansible.builtin.set_stats:
+        data:
+          job_data: "{{ dict_return_to_job_artifacts |default( default_job_artifacts ) }}"
+          aggregate: false
+          per_host: false
 
   rescue:
     - name: "error writing into awx api job dict"
