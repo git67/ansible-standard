@@ -7,7 +7,9 @@
     - name: "update all packages"
       ansible.builtin.apt:
         name: "*"
+        update_cache: true
         state: latest
+        force_apt_get: true
 
     - name: "upgrade"
       ansible.builtin.apt:
