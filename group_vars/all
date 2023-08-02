@@ -5,8 +5,8 @@
 # supported os releases
 # can used for override the roles builtin defaults
 #supported_os:
-#  - redhat_9
-#  - ubuntu_21
+#  - redhat_2
+#  - ubuntu_19
 
 #ansible:
 #  name: ansible-admin
