@@ -1,0 +1,26 @@
+---
+- name: "update linux os"
+  tags:
+    - update_all
+
+  block:
+    - name: "prepare update"
+      ansible.builtin.shell: |
+        dnf clean all
+        rm -rf /var/cache/dnf
+        rm -rf /var/cache/yum
+      args:
+        executable: /bin/bash
+
+    - name: "update all packages"
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+        update_cache: true
+        update_only: false
+      register: update_state
+
+  rescue:
+    - name: "role {{ ansible_role_name }} failed"
+      ansible.builtin.fail:
+        msg: "{{ update_state.results | map(attribute='name') | list }}"
