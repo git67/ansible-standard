@@ -4,3 +4,4 @@ supported_os:
   - redhat_8
   - ubuntu_20
   - ubuntu_21
+  - fedora_38
