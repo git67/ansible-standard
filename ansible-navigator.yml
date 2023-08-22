@@ -2,13 +2,13 @@ ansible-navigator:
   ansible:
     config:
       path: ./ansible.cfg
-    cmdline: "--forks 20"
+    cmdline: "--forks 20 -u ansible"
   color:
     enable: true
     osc4: true
   execution-environment:
     enabled: true
-    image: quay.io/ansible/creator-ee:v0.4.2
+    image: quay.io/ansible/creator-ee:latest
   logging:
     level: critical
     append: false

@@ -21,7 +21,7 @@
         state: present
 
     - name: "add public key to ~/.ssh/authorized_keys"
-      ansible.builtin.authorized_key:
+      ansible.posix.authorized_key:
         user: "{{ ansible.name }}"
         key: "{{ lookup('file', ansible.pub_key_file) }}"
         state: present

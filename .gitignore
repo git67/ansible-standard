@@ -7,3 +7,5 @@ _html/
 **/.DS_Store
 **/awx/job*
 **/awx/stdout*
+**/artifacts
+**/*json
