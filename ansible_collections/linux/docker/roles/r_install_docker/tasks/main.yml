@@ -1,0 +1,65 @@
+---
+# tasks file for r_install_docker
+- name: "update linux os"
+  tags:
+    - install_docker
+
+  block:
+    - name: "update all packages"
+      ansible.builtin.apt:
+        name: "*"
+        update_cache: true
+        state: latest
+        force_apt_get: true
+
+    - name: "upgrade"
+      ansible.builtin.apt:
+        upgrade: dist
+        update_cache: true
+      when: os_upgrade  == "true"
+
+    - name: "installing needed packages"
+      ansible.builtin.apt:
+        name: "{{ packages }}"
+        state: present
+        update_cache: true
+      vars:
+        packages:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - software-properties-common
+        - gnupg-agent
+
+    - name: "getting hostvars dict"
+      ansible.builtin.setup:
+
+    - name: Add an apt signing key for Docker
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+    - name: Add apt repository for stable version
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ ansible_distribution_release }} stable
+        state: present
+
+    - name: Install Docker
+      apt:
+        name: "{{ packages }}"
+        state: present
+        update_cache: yes
+      vars:
+        packages:
+        - docker-ce
+        - docker-ce-cli 
+        - containerd.io
+
+    - name: Add user to docker group
+      user:
+        name: "{{ regular_user }}"
+        group: docker
+
+  rescue:
+    - name: "role {{ ansible_role_name }} failed"
+      ansible.builtin.fail:
+        msg: "error: during update linux os"

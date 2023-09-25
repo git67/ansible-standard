@@ -19,3 +19,5 @@
 #  sudo_entry: "ansible-admin ALL=(ALL) NOPASSWD: ALL"
 #  pub_key_file: "~/.ssh/id_rsa.pub"
 
+os_upgrade: "true"
+regular_user: "{{ ansible_env.SUDO_USER }}"
