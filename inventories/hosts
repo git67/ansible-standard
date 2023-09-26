@@ -4,10 +4,10 @@ mn1 ansible_host=192.168.56.21
 [redhat]
 mn2 ansible_host=192.168.56.22
 
-[fedora-core]
+[fedora_core]
 fedora ansible_host=192.168.56.30
 
 [linux:children]
 ubuntu
 redhat
-fedora
+fedora_core
