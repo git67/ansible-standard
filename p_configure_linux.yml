@@ -1,7 +1,7 @@
 ##############################################
 ---
 - name: "configure ansible client at {{ ansible_play_hosts|to_yaml }}"
-  hosts: "{{ group_name | default('all') }}"
+  hosts: "{{ group_name | default('linux') }}"
   collections:
     - community.general
     - linux.common
@@ -11,7 +11,7 @@
   gather_facts: false
   any_errors_fatal: true
   ignore_unreachable: false
-  debugger: on_failed
+  debugger: never
   become: true
   vars:
     pl_name: "p_configure_linux.yml"
@@ -61,12 +61,6 @@
             name: r_reboot_nodes
           tags:
             - reboot_nodes
-
-        - name: "role install docker"
-          ansible.builtin.include_role:
-            name: r_install_docker
-          tags:
-            - install_docker
 
       rescue:
         - name: "pre tasks {{ pl_name }} failed"

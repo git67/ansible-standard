@@ -10,4 +10,3 @@ fedora ansible_host=192.168.56.30
 [linux:children]
 ubuntu
 redhat
-fedora_core
