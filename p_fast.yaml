@@ -19,14 +19,16 @@
 
         - name: "set fact for state"
           ansible.builtin.set_fact:
-            dict_return_to_inubit: "{'state1': 'val1','state2': 'val2'}"
-            scalar_return_to_inubit: "for_raoul"
+            dict_results: "{'varName': '','varValue': ''}"
+            dict_messages: "{'type': '', 'action': '', 'message': ''}"
+            dict_overallStatus: "{'status': '','message': ''}"
 
         - name: "set special stat"
           ansible.builtin.set_stats:
             data:
-              inubit1: "{{ dict_return_to_inubit |default({'state1':'empty', 'state2':'empty'}) }}"
-              inubit2: "{{ scalar_return_to_inubit |default('empty') }}"
+              results: "{{ dict_results |default({'state1':'empty', 'state2':'empty'}) }}"
+              messages: "{{ dict_meaasge |default('empty') }}"
+              overallStatus: "{'status': 'status','message': 'message'}"
             aggregate: false
             per_host: false
 
