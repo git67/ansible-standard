@@ -1,6 +1,6 @@
 ---
 - name: "run fast for notification {{ ansible_play_hosts|to_yaml }}"
-  hosts: "{{ group_name | default('all') }}"
+  hosts: "{{ group_name | default('mn1') }}"
   collections:
     - community.general
   gather_facts: false
