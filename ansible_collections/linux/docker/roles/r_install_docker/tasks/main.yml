@@ -25,11 +25,11 @@
         update_cache: true
       vars:
         packages:
-        - apt-transport-https
-        - ca-certificates
-        - curl
-        - software-properties-common
-        - gnupg-agent
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - gnupg-agent
 
     - name: "getting hostvars dict"
       ansible.builtin.setup:

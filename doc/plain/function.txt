@@ -1,1 +1,2 @@
-- configure Linux with leon
+- configure Linux with Ansible
+- Willi's hot shit

@@ -19,10 +19,7 @@
 
         - name: "set fact for state"
           ansible.builtin.set_fact:
-            dict_return_to_inubit: {
-                        'state1': 'val1', 
-                        'state2': 'val2' 
-                        }   
+            dict_return_to_inubit: "{'state1': 'val1','state2': 'val2'}"
             scalar_return_to_inubit: "for_raoul"
 
         - name: "set special stat"
@@ -37,4 +34,3 @@
         - name: "pre tasks {{ pl_name }} failed"
           ansible.builtin.fail:
             msg: "running rollback"
-

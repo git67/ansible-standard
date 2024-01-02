@@ -30,7 +30,7 @@
       ansible.builtin.file:
         path: "/etc/sudoers.d/{{ ansible.sudo_file }}"
         state: touch
-        mode: 0644
+        mode: "0644"
         modification_time: preserve
         access_time: preserve
 

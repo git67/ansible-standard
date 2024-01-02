@@ -8,13 +8,13 @@
       ansible.builtin.file:
         path: "/etc/ansible/facts.d"
         state: directory
-        mode: 0755
+        mode: "0755"
 
     - name: "template fact files to /etc/ansible/facts.d"
       ansible.builtin.template:
         dest: "/etc/ansible/facts.d/{{ (item.split('/t_')[-1]).split('.j2')[0] }}"
         src: "{{ item }}"
-        mode: 0644
+        mode: "0644"
         force: false
       with_fileglob:
         - "templates/t_*.fact.j2"
