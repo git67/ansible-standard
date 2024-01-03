@@ -17,9 +17,9 @@
           ansible.builtin.include_role:
             name: r_set_state
           vars:
-            results: "{{ dict_results |default({}) }}"
-            messages: "{{ dict_messages |default({}) }}"
-            overallStatus: "{{ dict_overallStatus |default({}) }}"
+            dict_results: {'varName': 'pre_tasks', 'varValue': 'pre_tasks'}
+            dict_messages: {'type': 'pre_tasks', 'action': 'pre_tasks', 'message': 'pre_tasks'}
+            overallStatus: {'status': 'pre_tasks', 'message': 'pre_tasks'}
 
       rescue:
         - name: "pre tasks {{ pl_name }} failed"
