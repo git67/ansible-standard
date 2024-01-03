@@ -5,9 +5,10 @@ set -e
 AWX="192.168.56.23:30964"
 CRED="hs:hs"
 #PL="p_configure_linux.yml"
-PL="p_fast.yaml"
+PL="awx/p_fast.yaml"
+OUT="./out"
 
-clear
+clear && mkdir -p ${OUT}
 
 echo -e "Get TemplateID"
 ID=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
@@ -44,10 +45,10 @@ done
 echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
 
 curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
-                "http://${AWX}/api/v2/jobs/${JOB}/" > ./job_info.job_${ID}_${JOB}
+                "http://${AWX}/api/v2/jobs/${JOB}/" > ${OUT}/job_info.job_${ID}_${JOB}
 
 curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
-        "http://${AWX}/api/v2/jobs/${JOB}/stdout/?format=txt" > stdout.job_${ID}_${JOB}  
+        "http://${AWX}/api/v2/jobs/${JOB}/stdout/?format=txt" > ${OUT}/stdout.job_${ID}_${JOB}  
 
 
-echo -e "Wrote Logs: ./job_info.job_${ID}_${JOB}, stdout.job_${ID}_${JOB}\n\n"
+echo -e "Wrote Logs: ${OUT}/job_info.job_${ID}_${JOB}, stdout.job_${ID}_${JOB}\n\n"

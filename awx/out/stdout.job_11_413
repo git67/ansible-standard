@@ -1,0 +1,27 @@
+Identity added: /runner/artifacts/413/ssh_key_data (ansible@cn)
+[WARNING]: log file at /var/log/ansible.log is not writeable and we cannot create it, aborting
+[WARNING]: Found both group and host with same name: fedora
+
+PLAY [run fast for notification [fedora, mn1, mn2]] ****************************
+
+TASK [debug] *******************************************************************
+Wednesday 03 January 2024  12:50:42 +0000 (0:00:00.030)       0:00:00.030 ***** 
+ok: [mn1] => {
+    "msg": "p_fast.yml"
+}
+
+TASK [set fact for state] ******************************************************
+Wednesday 03 January 2024  12:50:42 +0000 (0:00:00.044)       0:00:00.075 ***** 
+ok: [mn1]
+
+TASK [set special stat] ********************************************************
+Wednesday 03 January 2024  12:50:42 +0000 (0:00:00.028)       0:00:00.103 ***** 
+ok: [mn1]
+
+PLAY RECAP *********************************************************************
+mn1                        : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+Wednesday 03 January 2024  12:50:42 +0000 (0:00:00.044)       0:00:00.147 ***** 
+=============================================================================== 
+debug ------------------------------------------------------------------- 0.04s
+set special stat -------------------------------------------------------- 0.04s
+set fact for state ------------------------------------------------------ 0.03s

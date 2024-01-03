@@ -1,0 +1,21 @@
+---
+# tasks file for r_set_state
+- name: "run fast for notification {{ ansible_play_hosts|to_yaml }}"
+  tags:
+    - set_state
+
+
+  block:
+    - name: "set special stat"
+      ansible.builtin.set_stats:
+        data:
+          results: "{{ dict_results |default({}) }}"
+          messages: "{{ dict_messages |default({}) }}"
+          overallStatus: "{{ dict_overallStatus |default({}) }}"
+        aggregate: "{{ bool_aggregate }}"
+        per_host: "{{ bool_per_host }}"
+
+  rescue:
+    - name: "error writing into awx api job dict"
+      ansible.builtin.fail:
+        msg: "error writing job dict"
