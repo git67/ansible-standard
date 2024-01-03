@@ -1,8 +1,6 @@
 ---
 - name: "run fast for notification {{ ansible_play_hosts|to_yaml }}"
   hosts: "{{ group_name | default('mn1') }}"
-  collections:
-    - community.general
   gather_facts: false
   any_errors_fatal: true
   ignore_unreachable: false
@@ -17,11 +15,20 @@
           ansible.builtin.debug:
             msg: "{{ pl_name }}"
 
-        - name: "set fact for state"
+        - name: "set fact for state 1"
           ansible.builtin.set_fact:
             dict_results: "{'varName': '1','varValue': '1'}"
             dict_messages: "{'type': '1', 'action': '1', 'message': '1'}"
             dict_overallStatus: "{'status': '1','message': '1'}"
+
+        - name: "set special stat"
+          ansible.builtin.set_stats:
+            data:
+              results: "{{ dict_results |default({}) }}"
+              messages: "{{ dict_messages |default({}) }}"
+              overallStatus: "{{ dict_overallStatus |default({}) }}"
+            aggregate: false
+            per_host: false
 
         - name: "set special stat"
           ansible.builtin.set_stats:
