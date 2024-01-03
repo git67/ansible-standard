@@ -37,9 +37,9 @@
           ansible.builtin.include_role:
             name: r_set_state
           vars:
-            results: "{{ dict_results |default({}) }}"
-            messages: "{{ dict_messages |default({}) }}"
-            overallStatus: "{{ dict_overallStatus |default({}) }}"
+            dict_results: {'varName': 'tasks', 'varValue': 'tasks'}
+            dict_messages: {'type': 'tasks', 'action': 'tasks', 'message': 'tasks'}
+            overallStatus: {'status': 'tasks', 'message': 'tasks'}
           tags:
             - set_state
 
@@ -56,9 +56,9 @@
           ansible.builtin.include_role:
             name: r_set_state
           vars:
-            results: "{{ dict_results |default({}) }}"
-            messages: "{{ dict_messages |default({}) }}"
-            overallStatus: "{{ dict_overallStatus |default({}) }}"
+            dict_results: {'varName': 'post_tasks', 'varValue': 'post_tasks'}
+            dict_messages: {'type': 'post_tasks', 'action': 'post_tasks', 'message': 'post_tasks'}
+            overallStatus: {'status': 'post_tasks', 'message': 'post_tasks'}
 
       rescue:
         - name: "pre tasks {{ pl_name }} failed"

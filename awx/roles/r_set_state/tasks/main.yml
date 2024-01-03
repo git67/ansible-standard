@@ -15,6 +15,10 @@
         aggregate: "{{ bool_aggregate }}"
         per_host: "{{ bool_per_host }}"
 
+    - name: "pause"
+      ansible.builtin.pause:
+        seconds: 5
+
   rescue:
     - name: "error writing into awx api job dict"
       ansible.builtin.fail:

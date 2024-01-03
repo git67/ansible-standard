@@ -38,7 +38,7 @@ do
 	GET_FROM_ANSIBLE=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
                 "http://${AWX}/api/v2/jobs/${JOB}/" | jq '.artifacts')
 
-	echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
+	[ "${GET_FROM_ANSIBLE}" != "{}" ] && echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
 
 done
 
