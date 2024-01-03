@@ -9,3 +9,4 @@ _html/
 **/awx/stdout*
 **/artifacts
 **/*json
+**/awx/out
