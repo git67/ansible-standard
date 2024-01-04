@@ -68,10 +68,10 @@
         - name: "set special stat"
           ansible.builtin.include_role:
             name: r_set_state
-          vars:
-            dict_results: {'varName': 'post_tasks', 'varValue': 'post_tasks'}
-            dict_messages: {'type': 'post_tasks', 'action': 'post_tasks', 'message': 'post_tasks'}
-            dict_overallStatus: {'status': 'post_tasks', 'message': 'post_tasks'}
+#          vars:
+#            dict_results: {'varName': 'post_tasks', 'varValue': 'post_tasks'}
+#            dict_messages: {'type': 'post_tasks', 'action': 'post_tasks', 'message': 'post_tasks'}
+#            dict_overallStatus: {'status': 'post_tasks', 'message': 'post_tasks'}
 
       rescue:
         - name: "post tasks {{ pl_name }} failed"
