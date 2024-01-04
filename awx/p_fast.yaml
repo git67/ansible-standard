@@ -35,6 +35,10 @@
             dict_messages: {'type': 'pre_tasks failed', 'action': 'pre_tasks failed', 'message': 'pre_tasks failed'}
             dict_overallStatus: {'status': 'pre_tasks failed', 'message': 'pre_tasks failed'}
 
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.fail:
+            msg: "running rollback"
+  
       tags:
         - always
 
@@ -53,7 +57,7 @@
             - set_state
 
       rescue:
-        - name: "pre tasks {{ pl_name }} failed"
+        - name: "tasks {{ pl_name }} failed"
           ansible.builtin.fail:
             msg: "running rollback"
 
@@ -70,7 +74,7 @@
             dict_overallStatus: {'status': 'post_tasks', 'message': 'post_tasks'}
 
       rescue:
-        - name: "pre tasks {{ pl_name }} failed"
+        - name: "post tasks {{ pl_name }} failed"
           ansible.builtin.fail:
             msg: "running rollback"
 
