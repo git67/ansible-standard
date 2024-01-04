@@ -35,12 +35,12 @@ do
 	FAILED=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
         	"http://${AWX}/api/v2/jobs/${JOB}/" | jq '.failed')
 
-	echo -e  "\t-> ${JOB}\t${ID}\t${STATUS}\t${FAILED}"
-
 	GET_FROM_ANSIBLE=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
                 "http://${AWX}/api/v2/jobs/${JOB}/" | jq '.artifacts')
 
 	[ "${GET_FROM_ANSIBLE}" != "{}" ] && echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
+
+	echo -e  "\t-> ${JOB}\t${ID}\t${STATUS}\t${FAILED}"
 
 done
 
