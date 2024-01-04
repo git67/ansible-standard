@@ -26,14 +26,14 @@
             msg: "{{ error }}"
           failed_when: error == "1"
 
-#      rescue:
-#        - name: "pre tasks {{ pl_name }} failed"
-#          ansible.builtin.include_role:
-#            name: r_set_state
-#          vars:
-#            dict_results: {'varName': 'pre_tasks', 'varValue': 'pre_tasks'}
-#            dict_messages: {'type': 'pre_tasks', 'action': 'pre_tasks', 'message': 'pre_tasks'}
-#            dict_overallStatus: {'status': 'pre_tasks', 'message': 'pre_tasks'}
+      rescue:
+        - name: "pre tasks {{ pl_name }} failed"
+          ansible.builtin.include_role:
+            name: r_set_state
+          vars:
+            dict_results: {'varName': 'pre_tasks failed', 'varValue': 'pre_tasks failed'}
+            dict_messages: {'type': 'pre_tasks failed', 'action': 'pre_tasks failed', 'message': 'pre_tasks failed'}
+            dict_overallStatus: {'status': 'pre_tasks failed', 'message': 'pre_tasks failed'}
 
       tags:
         - always
