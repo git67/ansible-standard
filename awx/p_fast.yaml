@@ -22,7 +22,7 @@
             dict_overallStatus: {'status': 'pre_tasks', 'message': 'pre_tasks'}
 
         - name: "build error"
-          ansible.builtin.debug:
+          ansible.builtin.fail:
             msg: "{{ error }}"
           failed_when: error == "1"
 
