@@ -24,7 +24,7 @@
         - name: "build error"
           ansible.builtin.fail:
             msg: "{{ error }}"
-          failed_when: error == "1"
+          failed_when: error == "2"
 
       rescue:
         - name: "pre tasks {{ pl_name }} failed"
