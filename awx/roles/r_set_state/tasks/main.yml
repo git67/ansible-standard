@@ -4,7 +4,6 @@
   tags:
     - set_state
 
-
   block:
     - name: "set fact" 
       ansible.builtin.set_fact:
@@ -20,12 +19,3 @@
           overallStatus: "{{ overallStatus }}"
         aggregate: "{{ bool_aggregate }}"
         per_host: "{{ bool_per_host }}"
-
-    - name: "pause"
-      ansible.builtin.pause:
-        seconds: 2
-
-  rescue:
-    - name: "error setting sepial fact"
-      ansible.builtin.fail:
-        msg: "error setting sepial fact"

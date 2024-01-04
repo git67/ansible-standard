@@ -4,7 +4,7 @@
   gather_facts: true
   any_errors_fatal: true
   ignore_unreachable: false
-  debugger: on_failed
+  debugger: never
   become: true
   vars:
     pl_name: "p_fast.yml"
@@ -21,10 +21,19 @@
             dict_messages: {'type': 'pre_tasks', 'action': 'pre_tasks', 'message': 'pre_tasks'}
             dict_overallStatus: {'status': 'pre_tasks', 'message': 'pre_tasks'}
 
-      rescue:
-        - name: "pre tasks {{ pl_name }} failed"
-          ansible.builtin.fail:
-            msg: "running rollback"
+        - name: "build error"
+          ansible.builtin.debug:
+            msg: "{{ error }}"
+          failed_when: error == "1"
+
+#      rescue:
+#        - name: "pre tasks {{ pl_name }} failed"
+#          ansible.builtin.include_role:
+#            name: r_set_state
+#          vars:
+#            dict_results: {'varName': 'pre_tasks', 'varValue': 'pre_tasks'}
+#            dict_messages: {'type': 'pre_tasks', 'action': 'pre_tasks', 'message': 'pre_tasks'}
+#            dict_overallStatus: {'status': 'pre_tasks', 'message': 'pre_tasks'}
 
       tags:
         - always
