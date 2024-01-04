@@ -1,7 +1,7 @@
 ---
 - name: "run fast for notification {{ ansible_play_hosts|to_yaml }}"
   hosts: "{{ group_name | default('mn1') }}"
-  gather_facts: false
+  gather_facts: true
   any_errors_fatal: true
   ignore_unreachable: false
   debugger: on_failed

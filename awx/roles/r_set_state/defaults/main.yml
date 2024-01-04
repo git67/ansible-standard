@@ -4,6 +4,6 @@ dict_results: "{'varName': 'unset','varValue': 'unset'}"
 dict_messages: "{'type': 'unset', 'action': 'unset', 'message': 'unset'}"
 dict_overallStatus: "{'status': 'unset','message': 'unset'}"
 
-bool_aggregate: false
+bool_aggregate: true
 bool_per_host: false
 

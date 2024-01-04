@@ -43,7 +43,6 @@ do
 done
 
 echo -e  "\t-> ${JOB}\t${ID}\t${STATUS}\t${FAILED}"
-# echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
 
 curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
                 "http://${AWX}/api/v2/jobs/${JOB}/" > ${OUT}/job_info.job_${ID}_${JOB}
