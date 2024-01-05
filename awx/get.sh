@@ -4,9 +4,11 @@ set -e
 
 AWX="192.168.56.23:30964"
 CRED="hs:hs"
-#PL="p_configure_linux.yml"
 PL="awx/p_fast.yaml"
+
 OUT="./out"
+
+
 
 clear && mkdir -p ${OUT}
 
@@ -17,11 +19,9 @@ ID=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
 echo -e "\t-> ${ID}\n\n"
 
 echo -e "Launch Template and get JOBID"
-#JOB=$(curl -k -s --user ${CRED} -X POST -H "Content-Type: application/json" \
-JOB=$(curl --user ${CRED} -L --post301 -H "Content-Type: application/json" \
+JOB=$(curl -k -s --user ${CRED} -L -X POST -H "Content-Type: application/json" \
         --data @extra_vars.json \
         "http://${AWX}/api/v2/job_templates/${ID}/launch/" |jq '.job') 
-        #--data '{"failed:" 0}'|jq '.job') 
 echo -e "\t-> ${JOB}\n\n"
 
 
