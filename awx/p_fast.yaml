@@ -8,6 +8,7 @@
   become: true
   vars:
     pl_name: "p_fast.yml"
+    error: "{{ error|default('0') }}"
 
 ##############################################
 

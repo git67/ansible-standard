@@ -43,8 +43,8 @@ do
 
 	[ "${GET_FROM_ANSIBLE}" != "{}" ] && echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
 
-	[ "${STATUS}" == "successful" ] && break
-	[ "${STATUS}" == "failed" ] && break
+	([ "${STATUS}" == "successful" ] ||  [ "${STATUS}" == "failed" ]) && break
+	#[ "${STATUS}" == "failed" ] && break
 done
 
 curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
