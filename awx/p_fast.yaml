@@ -13,6 +13,10 @@
 
   pre_tasks:
     - block:
+        - name: debug
+          debug:
+            msg: "{{ failed }}"
+
         - name: "provoke error for test reasons in pre_task section"
           ansible.builtin.fail:
             msg: "{{ failed }}"

@@ -8,7 +8,6 @@ CRED="hs:hs"
 PL="awx/p_fast.yaml"
 OUT="./out"
 
-EXTRA_VARS="{'extra_vars': {'failed': 0}}"
 clear && mkdir -p ${OUT}
 
 echo -e "Get TemplateID"
@@ -18,9 +17,10 @@ ID=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
 echo -e "\t-> ${ID}\n\n"
 
 echo -e "Launch Template and get JOBID"
-JOB=$(curl -k -s --user ${CRED} -X POST -H "Content-Type: application/json" \
-        "http://${AWX}/api/v2/job_templates/${ID}/launch/" \
-        --data '{"extra_vars": {"failed": "0"}}'|jq '.job') 
+#JOB=$(curl -k -s --user ${CRED} -X POST -H "Content-Type: application/json" \
+JOB=$(curl --user ${CRED} -L --post301 -H "Content-Type: application/json" \
+        --data @extra_vars.json \
+        "http://${AWX}/api/v2/job_templates/${ID}/launch/" |jq '.job') 
         #--data '{"failed:" 0}'|jq '.job') 
 echo -e "\t-> ${JOB}\n\n"
 
@@ -37,11 +37,13 @@ do
 	FAILED=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
         	"http://${AWX}/api/v2/jobs/${JOB}/" | jq '.failed')
 
+	echo -e  "\t-> ${JOB}\t${ID}\t${STATUS}\t${FAILED}"
+
 	GET_FROM_ANSIBLE=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
                 "http://${AWX}/api/v2/jobs/${JOB}/" | jq '.artifacts')
 
 
-	echo -e  "\t-> ${JOB}\t${ID}\t${STATUS}\t${FAILED}"
+	sleep 2
 
 	[ "${GET_FROM_ANSIBLE}" != "{}" ] && echo -e "\n\nReturn:\n${GET_FROM_ANSIBLE}\n\n"
 
