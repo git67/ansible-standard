@@ -13,21 +13,13 @@
 
   pre_tasks:
     - block:
-        - name: "set special stat"
-          ansible.builtin.include_role:
-            name: r_set_state
-          vars:
-            dict_results: {'varName': 'pre_tasks', 'varValue': 'pre_tasks'}
-            dict_messages: {'type': 'pre_tasks', 'action': 'pre_tasks', 'message': 'pre_tasks'}
-            dict_overallStatus: {'status': 'pre_tasks', 'message': 'pre_tasks'}
-
         - name: "build error"
           ansible.builtin.fail:
             msg: "{{ error }}"
-          failed_when: error == "2"
+          failed_when: error == "1"
 
       rescue:
-        - name: "pre tasks {{ pl_name }} failed"
+        - name: "set fail state"
           ansible.builtin.include_role:
             name: r_set_state
           vars:
@@ -46,17 +38,20 @@
 
   tasks:
     - block:
-        - name: "set special stat"
+        - name: "build error"
+          ansible.builtin.fail:
+            msg: "{{ error }}"
+          failed_when: error == "2"
+
+      rescue:
+        - name: "set fail state"
           ansible.builtin.include_role:
             name: r_set_state
           vars:
-            dict_results: {'varName': 'tasks', 'varValue': 'tasks'}
-            dict_messages: {'type': 'tasks', 'action': 'tasks', 'message': 'tasks'}
-            dict_overallStatus: {'status': 'tasks', 'message': 'tasks'}
-          tags:
-            - set_state
+            dict_results: {'varName': 'tasks failed', 'varValue': 'tasks failed'}
+            dict_messages: {'type': 'tasks failed', 'action': 'tasks failed', 'message': 'tasks failed'}
+            dict_overallStatus: {'status': 'tasks failed', 'message': 'tasks failed'}
 
-      rescue:
         - name: "tasks {{ pl_name }} failed"
           ansible.builtin.fail:
             msg: "running rollback"
@@ -65,15 +60,28 @@
 
   post_tasks:
     - block:
+        - name: "build error"
+          ansible.builtin.fail:
+            msg: "{{ error }}"
+          failed_when: error == "3"
+
         - name: "set special stat"
           ansible.builtin.include_role:
             name: r_set_state
           vars:
-            dict_results: {'varName': 'post_tasks', 'varValue': 'post_tasks'}
-            dict_messages: {'type': 'post_tasks', 'action': 'post_tasks', 'message': 'post_tasks'}
-            dict_overallStatus: {'status': 'post_tasks', 'message': 'post_tasks'}
+            dict_results: {'varName': 'success', 'varValue': 'success'}
+            dict_messages: {'type': 'success', 'action': 'success', 'message': 'success'}
+            dict_overallStatus: {'status': 'success', 'message': 'success'}
 
       rescue:
+        - name: "set fail state"
+          ansible.builtin.include_role:
+            name: r_set_state
+          vars:
+            dict_results: {'varName': 'post_tasks failed', 'varValue': 'post_tasks failed'}
+            dict_messages: {'type': 'post_tasks failed', 'action': 'post_tasks failed', 'message': 'post_tasks failed'}
+            dict_overallStatus: {'status': 'post_tasks failed', 'message': 'post_tasks failed'}
+
         - name: "post tasks {{ pl_name }} failed"
           ansible.builtin.fail:
             msg: "running rollback"
