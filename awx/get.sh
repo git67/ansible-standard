@@ -8,6 +8,7 @@ CRED="hs:hs"
 PL="awx/p_fast.yaml"
 OUT="./out"
 
+EXTRA_VARS="{'extra_vars': {'failed': 0}}"
 clear && mkdir -p ${OUT}
 
 echo -e "Get TemplateID"
@@ -19,7 +20,8 @@ echo -e "\t-> ${ID}\n\n"
 echo -e "Launch Template and get JOBID"
 JOB=$(curl -k -s --user ${CRED} -X POST -H "Content-Type: application/json" \
         "http://${AWX}/api/v2/job_templates/${ID}/launch/" \
-        --data '{}'|jq '.job') 
+        --data '{"extra_vars": {"failed": "0"}}'|jq '.job') 
+        #--data '{"failed:" 0}'|jq '.job') 
 echo -e "\t-> ${JOB}\n\n"
 
 
