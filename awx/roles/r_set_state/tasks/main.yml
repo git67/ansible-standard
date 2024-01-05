@@ -1,6 +1,6 @@
 ---
 # tasks file for r_set_state
-- name: "run fast for notification {{ ansible_play_hosts|to_yaml }}"
+- name: "set state for job endpoint"
   tags:
     - set_state
 
@@ -11,7 +11,7 @@
         messages: "{{ dict_messages |default({}) }}"
         overallStatus: "{{ dict_overallStatus |default({}) }}"
 
-    - name: "set special stat"
+    - name: "set special state"
       ansible.builtin.set_stats:
         data:
           results: "{{ results }}"
