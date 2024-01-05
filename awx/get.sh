@@ -28,7 +28,7 @@ echo -e "Launched: ..."
 STATUS=""
 FAILED=""
 
-while [ "${STATUS}" != "successful" ] 
+while true
 do
 	STATUS=$(curl -k -s --user ${CRED} -X GET -H "Content-Type: application/json" \
         	"http://${AWX}/api/v2/jobs/${JOB}/" | jq '.status'|sed -e 's/"//g')
