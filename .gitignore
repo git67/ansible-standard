@@ -8,5 +8,4 @@ _html/
 **/awx/job*
 **/awx/stdout*
 **/artifacts
-**/*json
 **/awx/out
