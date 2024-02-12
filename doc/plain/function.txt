@@ -1,2 +1,4 @@
 - configure Linux with Ansible
 - Willi's hot shit
+- adding new functionality
+- hot and spicy
