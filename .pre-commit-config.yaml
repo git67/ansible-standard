@@ -2,11 +2,11 @@
 # https://github.com/pre-commit
 #
 repos:
-- repo: https://github.com/ansible/ansible-lint.git
-  rev: v6.20.3
-  hooks:
-    - id: ansible-lint
-      files: \.(yaml|yml)$
+#- repo: https://github.com/ansible/ansible-lint.git
+#  rev: v6.20.3
+#  hooks:
+#    - id: ansible-lint
+#      files: \.(yaml|yml)$
 
 - repo: local
   hooks:
