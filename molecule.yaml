@@ -1,0 +1,35 @@
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+platforms:
+  - name: app-role-test
+    image: geerlingguy/docker-debian12-ansible:latest
+    pre_build_image: true
+
+provisioner:
+  name: ansible
+  inventory:
+    host_vars:
+      app-role-test:
+        app_port: 8080
+        deploy_env: test
+  playbooks:
+    converge: converge.yml
+
+verifier:
+  name: ansible
+
+scenario:
+  test_sequence:
+    - dependency
+    - lint
+    - destroy
+    - create
+    - converge
+    - idempotence
+    - verify
+    - destroy
+
